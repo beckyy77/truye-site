@@ -1,0 +1,465 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Rebecca Ayele builds business websites and personal portfolios in the UAE.">
+<style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<title>Becky Web Studio</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600&display=swap">
+<style>
+/* Layout: one narrow reading column; a woven tilet band marks each section break; the featured project sits in a drawn browser frame */
+:root {
+  --bg: #f6f7f5;
+  --surface: #ffffff;
+  --ink: #12302e;
+  --muted: #4d6461;
+  --line: #d6dfdc;
+  --teal: #0f5c56;
+  --gold: #d99a1e;
+  --gold-soft: #f6e3b8;
+  --on-teal: #f6f7f5;
+  --display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --body: "Figtree", "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0d1a19; --surface: #132422; --ink: #e8efed; --muted: #a2b5b1; --line: #24403c;
+    --teal: #4fb3a8; --gold: #e8b04a; --gold-soft: #3a2f17; --on-teal: #0d1a19;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0d1a19; --surface: #132422; --ink: #e8efed; --muted: #a2b5b1; --line: #24403c;
+  --teal: #4fb3a8; --gold: #e8b04a; --gold-soft: #3a2f17; --on-teal: #0d1a19;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font: 400 1.0625rem/1.65 var(--body); }
+.wrap {
+  max-width: 64rem; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+h1, h2, h3 { font-family: var(--display); line-height: 1.1; text-wrap: balance; margin: 0; }
+h1 { font-size: clamp(2.4rem, 6vw, 4.2rem); font-weight: 800; letter-spacing: -0.02em; }
+h2 { font-size: clamp(1.7rem, 3.6vw, 2.4rem); font-weight: 700; letter-spacing: -0.01em; }
+h3 { font-size: 1.2rem; font-weight: 700; }
+p { margin: 0; }
+a { color: var(--teal); }
+a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; border-radius: 4px; }
+.eyebrow { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--teal); }
+.lede { color: var(--muted); max-width: 38rem; font-size: 1.15rem; }
+
+/* Tilet band: woven border pattern used on Habesha cloth */
+.tilet {
+  height: 22px;
+  border-block: 3px solid var(--teal);
+  background:
+    linear-gradient(135deg, var(--gold) 25%, transparent 25%) -11px 0 / 22px 22px,
+    linear-gradient(225deg, var(--gold) 25%, transparent 25%) -11px 0 / 22px 22px,
+    linear-gradient(315deg, var(--gold) 25%, transparent 25%) 0 0 / 22px 22px,
+    linear-gradient(45deg, var(--gold) 25%, transparent 25%) 0 0 / 22px 22px;
+  background-color: var(--bg);
+}
+
+header.top .wrap { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding-block: 20px; flex-wrap: wrap; }
+.brand { font-family: var(--display); font-weight: 800; font-size: 1.25rem; }
+.brand span { color: var(--gold); }
+nav { display: flex; gap: 20px; flex-wrap: wrap; font-weight: 500; font-size: 0.95rem; }
+nav a { color: var(--ink); text-decoration: none; }
+nav a:hover { color: var(--teal); }
+.theme-btn { font: 500 0.9rem var(--body); color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 6px 14px; cursor: pointer; }
+
+.hero .wrap { padding-block: 56px 64px; display: grid; gap: 24px; }
+.hero h1 em { font-style: normal; color: var(--teal); }
+.cta-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 8px; }
+.btn {
+  display: inline-flex; align-items: center; gap: 8px; padding: 12px 20px; border-radius: 999px;
+  font: 600 1rem var(--body); text-decoration: none; border: 2px solid var(--teal); cursor: pointer;
+}
+.btn.primary { background: var(--teal); color: var(--on-teal); }
+.btn.ghost { background: transparent; color: var(--teal); }
+.facts { display: flex; gap: 28px; flex-wrap: wrap; margin-top: 16px; color: var(--muted); font-size: 0.95rem; }
+.facts b { display: block; font-family: var(--display); font-size: 1.6rem; color: var(--ink); font-variant-numeric: tabular-nums; }
+
+section .wrap { padding-block: 64px; display: grid; gap: 28px; }
+.head { display: grid; gap: 10px; }
+
+/* Featured project */
+.project { display: grid; grid-template-columns: 1.15fr 1fr; gap: 32px; align-items: start; }
+.project > * { min-width: 0; }
+.browser { border: 1px solid var(--line); border-radius: 12px; overflow: hidden; background: var(--surface); box-shadow: 0 18px 40px -24px rgba(18, 48, 46, 0.45); }
+.browser .bar { display: flex; align-items: center; gap: 6px; padding: 10px 12px; border-bottom: 1px solid var(--line); }
+.browser .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--line); }
+.browser .url { margin-left: 8px; flex: 1; min-width: 0; font-size: 0.82rem; color: var(--muted); background: var(--bg); border-radius: 6px; padding: 4px 10px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.shot { display: block; width: 100%; max-width: 100%; height: auto; aspect-ratio: 1440 / 1100; object-fit: cover; object-position: top; }
+.shots { position: relative; padding-bottom: 48px; }
+.phone { position: absolute; right: 12px; bottom: 0; width: 30%; max-width: 190px; border: 6px solid #12302e; border-radius: 22px; overflow: hidden; background: #12302e; box-shadow: 0 18px 40px -16px rgba(18, 48, 46, 0.6); }
+.phone img { display: block; width: 100%; height: auto; }
+.wa-btn { background: #1f8f4e; border-color: #1f8f4e; color: #ffffff; }
+.wa-ico { width: 20px; height: 20px; flex: 0 0 auto; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linejoin: round; }
+.wa-ico .wa-phone { fill: currentColor; stroke: none; }
+.mock { padding: 28px 24px; display: grid; gap: 14px; }
+.mock .tilet { height: 14px; border-width: 2px; background-size: 14px 14px; background-position: -7px 0, -7px 0, 0 0, 0 0; }
+.mock h3 { font-size: 1.6rem; }
+.mock p { color: var(--muted); font-size: 0.95rem; }
+.pills { display: flex; flex-wrap: wrap; gap: 6px; }
+.pill { font-size: 0.78rem; padding: 4px 10px; border-radius: 999px; background: var(--gold-soft); color: var(--ink); }
+.pagelist { list-style: none; margin: 0; padding: 0; display: grid; }
+.pagelist li { display: grid; grid-template-columns: 1fr auto; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+.pagelist li:first-child { border-top: 1px solid var(--line); }
+.pagelist code { font-size: 0.82rem; color: var(--muted); }
+.project .meta { display: grid; gap: 16px; }
+
+/* Prices */
+.plans { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.plan { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 28px; display: grid; gap: 14px; align-content: start; }
+.plan.main { border: 2px solid var(--teal); }
+.price { font-family: var(--display); font-size: 2.4rem; font-weight: 800; font-variant-numeric: tabular-nums; }
+.price small { font-family: var(--body); font-size: 1rem; font-weight: 500; color: var(--muted); }
+.plan ul { margin: 0; padding-left: 1.1em; display: grid; gap: 6px; }
+.addons { display: grid; gap: 0; }
+.addons div { display: flex; justify-content: space-between; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+.addons span:last-child { font-weight: 600; font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+/* Process: a real sequence */
+.steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; counter-reset: s; }
+.steps li { counter-increment: s; display: grid; gap: 8px; align-content: start; }
+.steps li::before { content: counter(s); font-family: var(--display); font-weight: 800; font-size: 1.1rem; width: 40px; height: 40px; display: grid; place-items: center; border-radius: 50%; background: var(--gold); color: #12302e; }
+.steps p { color: var(--muted); font-size: 0.95rem; }
+
+.who { display: flex; flex-wrap: wrap; gap: 10px; }
+.who span { border: 1px solid var(--line); background: var(--surface); padding: 8px 14px; border-radius: 999px; font-size: 0.95rem; }
+
+.about { display: grid; grid-template-columns: 1.4fr 1fr; gap: 40px; align-items: start; }
+.about > * { min-width: 0; }
+.about-text { display: grid; gap: 16px; max-width: 40rem; }
+.about-text p { color: var(--muted); }
+.about-text p strong { color: var(--ink); }
+.about-side { display: grid; gap: 20px; }
+.portrait { width: 160px; height: 160px; max-width: 100%; border-radius: 50%; object-fit: cover; border: 4px solid var(--gold); }
+.facts-list { margin: 0; display: grid; }
+.facts-list div { display: grid; gap: 2px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+.facts-list div:first-child { border-top: 1px solid var(--line); }
+.facts-list dt { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal); }
+.facts-list dd { margin: 0; }
+@media (max-width: 760px) { .about { grid-template-columns: 1fr; } }
+
+details { border-bottom: 1px solid var(--line); padding: 16px 0; }
+details:first-of-type { border-top: 1px solid var(--line); }
+summary { cursor: pointer; font-weight: 600; font-size: 1.05rem; }
+details p { margin-top: 10px; color: var(--muted); max-width: 42rem; }
+
+.contact { background: var(--teal); color: var(--on-teal); }
+.contact a, .contact .eyebrow { color: var(--on-teal); }
+.contact .lede { color: var(--on-teal); opacity: 0.85; }
+.number { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.number output { font-family: var(--display); font-size: clamp(1.5rem, 4vw, 2.2rem); font-weight: 700; user-select: all; font-variant-numeric: tabular-nums; }
+.contact .btn { background: var(--on-teal); color: var(--teal); border-color: var(--on-teal); }
+.note { font-size: 0.85rem; opacity: 0.8; }
+footer .wrap { padding-block: 24px; color: var(--muted); font-size: 0.9rem; }
+
+@media (max-width: 760px) {
+  .project, .plans { grid-template-columns: 1fr; }
+  .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 440px) {
+  .steps { grid-template-columns: 1fr; }
+  nav { display: none; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .btn { transition: transform 0.15s ease; }
+  .btn:hover { transform: translateY(-2px); }
+}
+</style>
+
+<header class="top">
+  <div class="wrap">
+    <div class="brand">Becky <span>Web Studio</span></div>
+    <nav aria-label="Sections">
+      <a href="#work">Work</a>
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#how">How it works</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <button class="theme-btn" id="theme" type="button">Dark mode</button>
+  </div>
+</header>
+
+<div class="tilet" aria-hidden="true"></div>
+
+<section class="hero">
+  <div class="wrap">
+    <p class="eyebrow">Business websites & personal portfolios · UAE</p>
+    <h1>Your shop deserves more than an <em>Instagram page.</em></h1>
+    <p class="lede">I design and build simple, beautiful websites for tailors, salons, restaurants and local shops, and personal portfolio sites for people who want to stand out. You tell me about your business or yourself. I handle the design, the writing, the setup and the updates.</p>
+    <div class="cta-row">
+      <a class="btn primary" href="https://wa.me/971557761780?text=Hi%20Rebecca%2C%20I%27d%20like%20a%20website%20for%20" target="_blank" rel="noopener"><svg class="wa-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/><path class="wa-phone" d="M15.9 13.6v1.2a.8.8 0 0 1-.9.8 7.9 7.9 0 0 1-3.4-1.2 7.8 7.8 0 0 1-2.4-2.4 7.9 7.9 0 0 1-1.2-3.5.8.8 0 0 1 .8-.9h1.2a.8.8 0 0 1 .8.7c.05.4.15.8.28 1.1a.8.8 0 0 1-.18.85l-.5.5a6.4 6.4 0 0 0 2.4 2.4l.5-.5a.8.8 0 0 1 .85-.18c.36.13.74.23 1.1.28a.8.8 0 0 1 .7.82z"/></svg>Message me on WhatsApp</a>
+      <a class="btn ghost" href="#work">See my work</a>
+    </div>
+    <div class="facts">
+      <div><b>~1 week</b>from first chat to live site</div>
+      <div><b>Free</b>first chat and quote</div>
+      <div><b>Mobile first</b>looks right on every phone</div>
+    </div>
+  </div>
+</section>
+
+<section id="work">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">Featured work</p>
+      <h2>WEG Design: custom Habesha clothing</h2>
+      <p class="lede">A family business in Addis Ababa making traditional Ethiopian dresses and men's wear to order. Every piece is cut to the customer's measurements and takes 1–2 weeks, so the site had to show the collections and explain how ordering works.</p>
+    </div>
+    <div class="project">
+      <div class="shots">
+        <div class="browser">
+          <div class="bar"><i class="dot"></i><i class="dot"></i><i class="dot"></i><div class="url">wegdesign.me</div></div>
+          <img class="shot" src="wegdesign-1-home.jpg" alt="WEG Design home page: Habesha wear, made to your size, with best-selling dresses below" width="1440" height="2200">
+        </div>
+        <div class="phone">
+          <img src="wegdesign-mobile.jpg" alt="WEG Design on a phone, with WhatsApp and Telegram order buttons along the bottom" width="817" height="1600">
+        </div>
+      </div>
+      <div class="meta">
+        <ul class="pagelist" aria-label="Pages on wegdesign.me">
+          <li><span>Home</span><code>/</code></li>
+          <li><span>Habesha dresses</span><code>/habesha-dresses</code></li>
+          <li><span>Wedding collection</span><code>/wedding</code></li>
+          <li><span>Graduation collection</span><code>/graduation</code></li>
+          <li><span>Men's traditional wear</span><code>/mens-traditional-wear</code></li>
+          <li><span>Measurement guide</span><code>/measurements</code></li>
+        </ul>
+        <p><a href="https://wegdesign.me/">Visit wegdesign.me →</a></p>
+      </div>
+    </div>
+
+    <div class="head">
+      <p class="eyebrow">In progress</p>
+      <h2>Guday: UAE visas and paperwork, handled</h2>
+      <p class="lede">A service that helps people prepare their UAE visa and paperwork documents, then files them through licensed partners. Customers start with a free checklist and get help in Amharic or English, all in one WhatsApp thread.</p>
+    </div>
+    <div class="project">
+      <div class="browser">
+        <div class="bar"><i class="dot"></i><i class="dot"></i><i class="dot"></i><div class="url">guday.me</div></div>
+        <img class="shot" src="guday-typing.png" alt="Guday home page: Your matter, handled, with a free checklist button and WhatsApp contact" width="2214" height="1132" style="aspect-ratio: 2214 / 1132">
+      </div>
+      <div class="meta">
+        <ul class="pagelist" aria-label="Features on the Guday site">
+          <li><span>60-second document checklist</span><code>free</code></li>
+          <li><span>Amharic and English versions</span><code>2 languages</code></li>
+          <li><span>One-tap WhatsApp contact</span><code>chat</code></li>
+          <li><span>Services, FAQ and business page</span><code>info</code></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="head">
+      <p class="eyebrow">In progress</p>
+      <h2>Guday PRO Academy: a free online course</h2>
+      <p class="lede">A free 8-module course that teaches UAE visa, PRO and typing-centre work, using official sources only. Learners take quizzes, practise on real-world cases and earn a certificate. No sign-up needed, and progress stays on the learner's own device.</p>
+    </div>
+    <div class="project">
+      <div class="browser">
+        <div class="bar"><i class="dot"></i><i class="dot"></i><i class="dot"></i><div class="url">guday.me/academy</div></div>
+        <img class="shot" src="guday-academy.png" alt="Guday PRO Academy home page: Learn UAE visa and PRO work the honest way, with course and practice case buttons" width="2222" height="1056" style="aspect-ratio: 2222 / 1056">
+      </div>
+      <div class="meta">
+        <ul class="pagelist" aria-label="Features on Guday PRO Academy">
+          <li><span>8 course modules with quizzes</span><code>course</code></li>
+          <li><span>Real-world case simulator</span><code>practice</code></li>
+          <li><span>Resources from official sources</span><code>library</code></li>
+          <li><span>Final exam and certificate</span><code>exam</code></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="tilet" aria-hidden="true"></div>
+
+<section id="about">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">About me</p>
+      <h2>Hi, I'm Rebecca Ayele</h2>
+    </div>
+    <div class="about">
+      <div class="about-text">
+        <p>I live in Abu Dhabi and build websites and apps from the ground up with AI. I trained in <strong>fashion design</strong> at Misrak TVET College and in <strong>graphic design</strong> at Dani Advertising and School of Graphics in Addis Ababa, so I care about how a page looks as much as how it works.</p>
+        <p>Before anything goes live, <strong>I check every line myself</strong>: the facts, the wording, the order of the steps, and the customer's privacy. Your customers only see work I'd put my own name on.</p>
+        <p>Besides client sites, I've built a private health app that keeps all its data on the phone, and a free 8-module course on UAE visa and PRO work, both in English and Amharic.</p>
+      </div>
+      <div class="about-side">
+      <img class="portrait" src="rebecca.jpg" alt="Rebecca Ayele" width="1024" height="1024">
+      <dl class="facts-list">
+        <div><dt>Based in</dt><dd>Abu Dhabi, UAE</dd></div>
+        <div><dt>Languages</dt><dd>Amharic (native) · English (fluent)</dd></div>
+        <div><dt>Training</dt><dd>Fashion design · Graphic design</dd></div>
+        <div><dt>I build</dt><dd>Websites, course sites and phone apps</dd></div>
+      </dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="tilet" aria-hidden="true"></div>
+
+<section id="services">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">Services</p>
+      <h2>What you get</h2>
+      <p class="lede">Every business is different, so I give you a clear quote after our first chat. You pay half to start and half when your site goes live.</p>
+    </div>
+    <div class="plans">
+      <div class="plan main">
+        <h3>Business website</h3>
+        <ul>
+          <li>Up to 6 pages, designed for your business</li>
+          <li>Works on phones, tablets and computers</li>
+          <li>WhatsApp button so customers can reach you in one tap</li>
+          <li>Enquiry or measurements form</li>
+          <li>Domain name included for the first year</li>
+          <li>Shows up on Google with your business name</li>
+        </ul>
+      </div>
+      <div class="plan">
+        <h3>Personal portfolio</h3>
+        <ul>
+          <li>Your own site that shows who you are and what you've done</li>
+          <li>Your story, your projects and your photos</li>
+          <li>A link to your CV that employers can open</li>
+          <li>Your name as the web address (like yourname.com)</li>
+          <li>Great for job seekers, freelancers, designers and students</li>
+        </ul>
+      </div>
+      <div class="plan">
+        <h3>Monthly care</h3>
+        <ul>
+          <li>Hosting: your site stays online</li>
+          <li>New products, photos and prices added for you</li>
+          <li>Small text changes whenever you need them</li>
+          <li>Cancel any time</li>
+        </ul>
+      </div>
+    </div>
+    <div class="addons" aria-label="Extras">
+      <div><span>Extra pages</span><span>On request</span></div>
+      <div><span>Second language (e.g. Arabic or Amharic)</span><span>On request</span></div>
+      <div><span>Online shop with payments</span><span>On request</span></div>
+    </div>
+    <div class="cta-row"><a class="btn primary" href="#contact">Ask for a free quote</a></div>
+  </div>
+</section>
+
+<section id="how">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">How it works</p>
+      <h2>From first message to live site</h2>
+    </div>
+    <ol class="steps">
+      <li><h3>Chat</h3><p>A free 20-minute call. Tell me about your business and what customers ask you most.</p></li>
+      <li><h3>Design</h3><p>Within 2–3 days I show you the look. You ask for changes until you're happy.</p></li>
+      <li><h3>Launch</h3><p>I build it, connect your domain and put it online. About one week in total.</p></li>
+      <li><h3>Care</h3><p>New collection or new prices? Send me a WhatsApp and I update it.</p></li>
+    </ol>
+  </div>
+</section>
+
+<div class="tilet" aria-hidden="true"></div>
+
+<section>
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">Who I build for</p>
+      <h2>Local businesses, and people who want to stand out</h2>
+    </div>
+    <div class="who">
+      <span>Tailors & fashion</span><span>Beauty salons</span><span>Restaurants & cafés</span>
+      <span>Clinics & therapists</span><span>Typing centres</span><span>Cargo & shipping</span>
+      <span>Community groups</span><span>Job seekers</span><span>Freelancers</span>
+      <span>Designers & photographers</span><span>Students</span>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">Questions</p>
+      <h2>Things people usually ask</h2>
+    </div>
+    <div>
+      <details><summary>Do I need to know anything about computers?</summary><p>No. You send me your photos, prices and a few words about your business on WhatsApp. I do the rest.</p></details>
+      <details><summary>Can you make a website just for me, not a business?</summary><p>Yes. A personal portfolio shows employers or clients who you are, what you've done and how to reach you. It's often more memorable than a CV on its own.</p></details>
+      <details><summary>What do I need to give you?</summary><p>Your logo if you have one, photos of your products or shop, your prices, your opening hours and your contact details. If you don't have good photos yet, I can tell you how to take them on your phone.</p></details>
+      <details><summary>Will it be mine?</summary><p>Yes. The domain is registered in your name and you own the website. If you stop monthly care, I hand everything over to you.</p></details>
+      <details><summary>How long does it take?</summary><p>Most sites are live in about a week. It depends on how quickly you send photos and approve the design.</p></details>
+      <details><summary>How much does it cost?</summary><p>It depends on how many pages you need and what the site should do. After a free chat I send you one clear price, with no hidden extras.</p></details>
+      <details><summary>How do I pay?</summary><p>Half when we start, half when the site goes live.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap">
+    <p class="eyebrow">Contact</p>
+    <h2>Let's talk about your business</h2>
+    <p class="lede">Send me a WhatsApp message about your business or yourself, and I'll send you a free quote.</p>
+    <div class="cta-row">
+      <a class="btn wa-btn" href="https://wa.me/971557761780?text=Hi%20Rebecca%2C%20I%27d%20like%20a%20website%20for%20" target="_blank" rel="noopener"><svg class="wa-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/><path class="wa-phone" d="M15.9 13.6v1.2a.8.8 0 0 1-.9.8 7.9 7.9 0 0 1-3.4-1.2 7.8 7.8 0 0 1-2.4-2.4 7.9 7.9 0 0 1-1.2-3.5.8.8 0 0 1 .8-.9h1.2a.8.8 0 0 1 .8.7c.05.4.15.8.28 1.1a.8.8 0 0 1-.18.85l-.5.5a6.4 6.4 0 0 0 2.4 2.4l.5-.5a.8.8 0 0 1 .85-.18c.36.13.74.23 1.1.28a.8.8 0 0 1 .7.82z"/></svg>Chat on WhatsApp</a>
+    </div>
+    <div class="number">
+      <output id="wa">+971 55 776 1780</output>
+      <button class="btn" id="copy" type="button">Copy number</button>
+    </div>
+    <p>Or email <strong style="user-select: all">Truyerebecca@gmail.com</strong></p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">Becky Web Studio · Rebecca Ayele · Business websites and personal portfolios in the UAE</div>
+</footer>
+
+<script>
+(function () {
+  var root = document.documentElement, btn = document.getElementById('theme'), saved = null;
+  try { saved = localStorage.getItem('theme'); } catch (e) {}
+  function apply(t) {
+    root.setAttribute('data-theme', t);
+    btn.textContent = t === 'dark' ? 'Light mode' : 'Dark mode';
+  }
+  apply(saved === 'dark' ? 'dark' : 'light');
+  btn.addEventListener('click', function () {
+    var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    apply(next);
+    try { localStorage.setItem('theme', next); } catch (e) {}
+  });
+})();
+document.getElementById('copy').addEventListener('click', function () {
+  var btn = this, out = document.getElementById('wa');
+  function done(msg) { btn.textContent = msg; setTimeout(function () { btn.textContent = 'Copy number'; }, 1800); }
+  function select() {
+    var r = document.createRange(); r.selectNodeContents(out);
+    var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+    done('Selected, press copy');
+  }
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(out.textContent).then(function () { done('Copied'); }, select);
+  } else { select(); }
+});
+</script>
+
+</body>
+</html>
