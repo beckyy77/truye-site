@@ -4,9 +4,17 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="description" content="Rebecca Ayele builds business websites and personal portfolios in the UAE.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://truye.me/">
+<meta property="og:title" content="Becky Web Studio | Rebecca Ayele">
+<meta property="og:description" content="Business websites and personal portfolios in the UAE. Free first chat and quote.">
+<meta property="og:image" content="https://truye.me/rebecca.jpg">
+<meta property="og:image:width" content="1024">
+<meta property="og:image:height" content="1024">
+<meta property="og:image:alt" content="Rebecca Ayele">
+<meta name="twitter:card" content="summary">
 <style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
-</head>
-<body>
 <title>Becky Web Studio</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,6 +30,7 @@
   --line: #d6dfdc;
   --teal: #0f5c56;
   --gold: #d99a1e;
+  --gold-text: #8f5d06;
   --gold-soft: #f6e3b8;
   --on-teal: #f6f7f5;
   --display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
@@ -30,13 +39,13 @@
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --bg: #0d1a19; --surface: #132422; --ink: #e8efed; --muted: #a2b5b1; --line: #24403c;
-    --teal: #4fb3a8; --gold: #e8b04a; --gold-soft: #3a2f17; --on-teal: #0d1a19;
+    --teal: #4fb3a8; --gold: #e8b04a; --gold-text: #e8b04a; --gold-soft: #3a2f17; --on-teal: #0d1a19;
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
   --bg: #0d1a19; --surface: #132422; --ink: #e8efed; --muted: #a2b5b1; --line: #24403c;
-  --teal: #4fb3a8; --gold: #e8b04a; --gold-soft: #3a2f17; --on-teal: #0d1a19;
+  --teal: #4fb3a8; --gold: #e8b04a; --gold-text: #e8b04a; --gold-soft: #3a2f17; --on-teal: #0d1a19;
   color-scheme: dark;
 }
 
@@ -71,13 +80,20 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 
 header.top .wrap { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding-block: 20px; flex-wrap: wrap; }
 .brand { font-family: var(--display); font-weight: 800; font-size: 1.25rem; }
-.brand span { color: var(--gold); }
+.brand span { color: var(--gold-text); }
 nav { display: flex; gap: 20px; flex-wrap: wrap; font-weight: 500; font-size: 0.95rem; }
 nav a { color: var(--ink); text-decoration: none; }
 nav a:hover { color: var(--teal); }
-.theme-btn { font: 500 0.9rem var(--body); color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 6px 14px; cursor: pointer; }
+.theme-btn { font: 500 0.82rem var(--body); color: var(--muted); background: none; border: none; padding: 6px 4px; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--line); }
+.theme-btn:hover { color: var(--ink); }
 
-.hero .wrap { padding-block: 56px 64px; display: grid; gap: 24px; }
+.hero .wrap { padding-block: 56px 56px; display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr); gap: 40px; align-items: center; }
+.hero-text { display: grid; gap: 24px; min-width: 0; }
+.h1-sub { font-family: var(--display); font-weight: 500; font-size: clamp(1.15rem, 2.2vw, 1.5rem); color: var(--muted); margin-top: -8px; }
+.hero-art { position: relative; justify-self: center; width: 100%; max-width: 280px; padding: 0 0 24px 24px; }
+.hero-phone { border: 7px solid #12302e; border-radius: 26px; overflow: hidden; background: #12302e; box-shadow: 0 24px 48px -20px rgba(18, 48, 46, 0.55); }
+.hero-phone img { display: block; width: 100%; height: auto; aspect-ratio: 817 / 1300; object-fit: cover; object-position: top; }
+.hero-portrait { position: absolute; left: 0; bottom: 0; width: 96px; height: 96px; border-radius: 50%; object-fit: cover; border: 4px solid var(--bg); box-shadow: 0 0 0 3px var(--gold); }
 .hero h1 em { font-style: normal; color: var(--teal); }
 .cta-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 8px; }
 .btn {
@@ -167,6 +183,8 @@ details p { margin-top: 10px; color: var(--muted); max-width: 42rem; }
 footer .wrap { padding-block: 24px; color: var(--muted); font-size: 0.9rem; }
 
 @media (max-width: 760px) {
+  .hero .wrap { grid-template-columns: 1fr; }
+  .hero-art { max-width: 220px; }
   .project, .plans { grid-template-columns: 1fr; }
   .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
@@ -179,6 +197,8 @@ footer .wrap { padding-block: 24px; color: var(--muted); font-size: 0.9rem; }
   .btn:hover { transform: translateY(-2px); }
 }
 </style>
+</head>
+<body>
 
 <header class="top">
   <div class="wrap">
@@ -198,8 +218,10 @@ footer .wrap { padding-block: 24px; color: var(--muted); font-size: 0.9rem; }
 
 <section class="hero">
   <div class="wrap">
+    <div class="hero-text">
     <p class="eyebrow">Business websites & personal portfolios · UAE</p>
     <h1>Your shop deserves more than an <em>Instagram page.</em></h1>
+    <p class="h1-sub">Or you want a personal portfolio that gets you noticed.</p>
     <p class="lede">I design and build simple, beautiful websites for tailors, salons, restaurants and local shops, and personal portfolio sites for people who want to stand out. You tell me about your business or yourself. I handle the design, the writing, the setup and the updates.</p>
     <div class="cta-row">
       <a class="btn primary" href="https://wa.me/971557761780?text=Hi%20Rebecca%2C%20I%27d%20like%20a%20website%20for%20" target="_blank" rel="noopener"><svg class="wa-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/><path class="wa-phone" d="M15.9 13.6v1.2a.8.8 0 0 1-.9.8 7.9 7.9 0 0 1-3.4-1.2 7.8 7.8 0 0 1-2.4-2.4 7.9 7.9 0 0 1-1.2-3.5.8.8 0 0 1 .8-.9h1.2a.8.8 0 0 1 .8.7c.05.4.15.8.28 1.1a.8.8 0 0 1-.18.85l-.5.5a6.4 6.4 0 0 0 2.4 2.4l.5-.5a.8.8 0 0 1 .85-.18c.36.13.74.23 1.1.28a.8.8 0 0 1 .7.82z"/></svg>Message me on WhatsApp</a>
@@ -210,8 +232,15 @@ footer .wrap { padding-block: 24px; color: var(--muted); font-size: 0.9rem; }
       <div><b>Free</b>first chat and quote</div>
       <div><b>Mobile first</b>looks right on every phone</div>
     </div>
+    </div>
+    <div class="hero-art" aria-hidden="true">
+      <div class="hero-phone"><img src="wegdesign-mobile.jpg" alt="" width="817" height="1600"></div>
+      <img class="hero-portrait" src="rebecca.jpg" alt="" width="1024" height="1024">
+    </div>
   </div>
 </section>
+
+<div class="tilet" aria-hidden="true"></div>
 
 <section id="work">
   <div class="wrap">
@@ -251,7 +280,7 @@ footer .wrap { padding-block: 24px; color: var(--muted); font-size: 0.9rem; }
     <div class="project">
       <div class="browser">
         <div class="bar"><i class="dot"></i><i class="dot"></i><i class="dot"></i><div class="url">guday.me</div></div>
-        <img class="shot" src="guday-typing.png" alt="Guday home page: Your matter, handled, with a free checklist button and WhatsApp contact" width="2214" height="1132" style="aspect-ratio: 2214 / 1132">
+        <img class="shot" src="guday-typing.webp" alt="Guday home page: Your matter, handled, with a free checklist button and WhatsApp contact" width="2214" height="1132" style="aspect-ratio: 2214 / 1132">
       </div>
       <div class="meta">
         <ul class="pagelist" aria-label="Features on the Guday site">
@@ -271,7 +300,7 @@ footer .wrap { padding-block: 24px; color: var(--muted); font-size: 0.9rem; }
     <div class="project">
       <div class="browser">
         <div class="bar"><i class="dot"></i><i class="dot"></i><i class="dot"></i><div class="url">guday.me/academy</div></div>
-        <img class="shot" src="guday-academy.png" alt="Guday PRO Academy home page: Learn UAE visa and PRO work the honest way, with course and practice case buttons" width="2222" height="1056" style="aspect-ratio: 2222 / 1056">
+        <img class="shot" src="guday-academy.webp" alt="Guday PRO Academy home page: Learn UAE visa and PRO work the honest way, with course and practice case buttons" width="2222" height="1056" style="aspect-ratio: 2222 / 1056">
       </div>
       <div class="meta">
         <ul class="pagelist" aria-label="Features on Guday PRO Academy">
