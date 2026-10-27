@@ -19,6 +19,10 @@
 .quote blockquote::before { content: "\201C"; font-size: 2.6rem; color: var(--gold); display: block; line-height: 0.6; margin-bottom: 10px; font-weight: 800; }
 .quote cite { display: block; margin-top: 14px; font-style: normal; font-family: var(--body); font-size: 0.92rem; color: var(--muted); }
 .quote cite strong { color: var(--teal); }
+.ai-band { border-block: 1px solid var(--line); background: var(--surface); padding: 40px 0; }
+.ai-band .head { text-align: center; max-width: 640px; margin: 0 auto 18px; }
+.ai-chips { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+.ai-chip { border: 1px solid var(--line); background: var(--bg); border-radius: 999px; padding: 7px 16px; font-size: .9rem; color: var(--teal); font-weight: 600; font-family: var(--body); }
 </style>
 <title>Becky Web Studio</title>
 <meta name="claude:viewport-fit-sides" content="cover">
@@ -356,6 +360,22 @@ footer .wrap { padding-block: 24px; color: var(--muted); font-size: 0.9rem; }
 </section>
 
 <div class="tilet" aria-hidden="true"></div>
+
+<section class="ai-band" aria-label="Built with AI">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">How it'"'"'s built</p>
+      <h2>Built with an AI team, led by me</h2>
+      <p class="lede">Every site I deliver is built with professional AI coding agents working under my direction. You get senior-developer quality in a fraction of the time — and I review every line and every pixel before anything goes live.</p>
+    </div>
+    <div class="ai-chips">
+      <span class="ai-chip">Claude Code</span>
+      <span class="ai-chip">Gemini</span>
+      <span class="ai-chip">pi</span>
+      <span class="ai-chip">grok</span>
+    </div>
+  </div>
+</section>
 
 <section id="services">
   <div class="wrap">
