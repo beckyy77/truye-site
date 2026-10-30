@@ -172,11 +172,6 @@ section .wrap { padding-block: 64px; display: grid; gap: 28px; }
 .about-text p { color: var(--muted); }
 .about-text p strong { color: var(--ink); }
 .about-side { display: grid; gap: 20px; }
-.portrait { width: 160px; height: 160px; max-width: 100%; border-radius: 50%; object-fit: cover; border: 4px solid var(--gold); }
-/* Cutout leans out of a gold ring: the circle is painted behind the transparent photo,
-   and only the bottom is rounded so the hair pops above the ring. */
-.cutout { width: 200px; height: 200px; max-width: 100%; border-radius: 0 0 50% 50%; transform: rotate(-4deg); transform-origin: bottom center; background: radial-gradient(circle closest-side, var(--gold-soft) calc(100% - 4px), var(--gold) calc(100% - 4px), var(--gold) 100%, transparent 100%); }
-@media (prefers-reduced-motion: no-preference) { .cutout { transition: transform 0.3s ease; } .cutout:hover { transform: rotate(0deg) translateY(-4px); } }
 .facts-list { margin: 0; display: grid; }
 .facts-list div { display: grid; gap: 2px; padding: 12px 0; border-bottom: 1px solid var(--line); }
 .facts-list div:first-child { border-top: 1px solid var(--line); }
@@ -212,6 +207,41 @@ footer .wrap { padding-block: 24px; color: var(--muted); font-size: 0.9rem; }
   .btn { transition: transform 0.15s ease; }
   .btn:hover { transform: translateY(-2px); }
 }
+
+/* About photo: the grab-my-face portrait from truye-face/. Its canvas overhangs the box by 20%,
+   so the section clips sideways overflow to stop phones scrolling left/right. */
+#about { overflow-x: clip; }
+.about-side .face-portrait { width: min(340px, 100%); margin: 8px auto 0; }
+  /* ===== Face portrait component (copy from here) ===== */
+  .face-portrait{position:relative;width:min(500px,90vw);aspect-ratio:1/1;margin:0 auto;
+    --face-circle:var(--teal); --face-ring:var(--gold)}
+  .face-portrait .face-circle{position:absolute;left:10%;top:18%;width:80%;height:80%;border-radius:50%;
+    background:var(--face-circle);box-shadow:0 0 0 6px var(--bg),0 0 0 9px var(--face-ring)}
+  .face-portrait{touch-action:none;cursor:grab;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent}
+  .face-portrait.is-grabbing{cursor:grabbing}
+  /* the canvas is 40% larger than the portrait box so big stretches are never cut off */
+  .face-portrait canvas{position:absolute;left:-20%;top:-20%;width:140%;height:140%;pointer-events:none}
+  .face-portrait .face-fallback{position:absolute;inset:0;width:100%;height:100%}
+  .face-portrait .face-fallback{display:none;object-fit:contain;clip-path:circle(40% at 50% 58%)}
+  .face-portrait.no-webgl .face-fallback{display:block}
+  .face-portrait .face-hint{position:absolute;right:-1%;top:7%;transform:rotate(6deg);
+    background:var(--gold);color:#12302e;font-family:var(--display);font-weight:800;font-size:clamp(.85rem,2.4vw,1rem);
+    padding:8px 14px;border-radius:999px;box-shadow:0 6px 18px rgba(18,48,46,.18);pointer-events:none;
+    transition:opacity .5s,transform .5s;animation:face-bob 2.4s ease-in-out infinite}
+  .face-portrait .face-hint::after{content:"";position:absolute;left:22px;bottom:-7px;width:14px;height:14px;background:var(--gold);transform:rotate(45deg);border-radius:2px}
+  .face-portrait.was-grabbed .face-hint{opacity:0;transform:rotate(6deg) translateY(-6px)}
+  @keyframes face-bob{50%{translate:0 -4px}}
+  .face-portrait .face-say{position:absolute;left:-2%;top:16%;z-index:2;pointer-events:none;
+    background:var(--surface);color:var(--ink);border:2px solid var(--gold);border-radius:18px;
+    font-family:var(--display);font-weight:800;font-size:clamp(1rem,2.8vw,1.3rem);padding:8px 16px;
+    box-shadow:0 8px 22px rgba(18,48,46,.16);opacity:0;transform:scale(.6) rotate(-8deg);transform-origin:80% 100%;
+    transition:opacity .15s,transform .25s cubic-bezier(.34,1.8,.64,1)}
+  .face-portrait .face-say::after{content:"";position:absolute;right:20px;bottom:-9px;width:14px;height:14px;background:inherit;
+    border-right:2px solid var(--gold);border-bottom:2px solid var(--gold);transform:rotate(45deg)}
+  .face-portrait .face-say.show{opacity:1;transform:scale(1) rotate(-8deg)}
+  .face-portrait .face-say.big{font-size:clamp(1.25rem,3.6vw,1.7rem);background:var(--gold);color:#12302e;transform:scale(1.08) rotate(-10deg)}
+  @media (prefers-reduced-motion:reduce){.face-portrait .face-hint,}
+  /* ===== end face portrait CSS ===== */
 </style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"ProfessionalService","name":"Becky Web Studio","founder":{"@type":"Person","name":"Rebecca Ayele","jobTitle":"Web Designer","sameAs":["https://linkedin.com/in/rebtruye","https://truye.me"]},"areaServed":"United Arab Emirates","address":{"@type":"PostalAddress","addressLocality":"Abu Dhabi","addressCountry":"AE"},"telephone":"+971557761780","url":"https://truye.me","email":"becky@truye.me","description":"Business websites and personal portfolios in the UAE. Free first chat and quote."}
@@ -371,7 +401,17 @@ footer .wrap { padding-block: 24px; color: var(--muted); font-size: 0.9rem; }
         <p>Besides client sites, I've built a private health app that keeps all its data on the phone, and a free 8-module course on UAE visa and PRO work, both in English and Amharic.</p>
       </div>
       <div class="about-side">
-      <img class="cutout" src="rebecca-cutout.webp" alt="Rebecca Ayele, smiling, in a black turtleneck and gold hoop earrings" width="200" height="200" loading="lazy" decoding="async">
+      <!-- ===== Face portrait component (copy from here) ===== -->
+      <div class="face-portrait" id="facePortrait"
+           data-img="rebecca-cutout.webp" data-img-silly="rebecca-silly-cutout.webp"
+           data-img-ouch="rebecca-ouch-cutout.webp" data-img-bigouch="rebecca-bigouch-cutout.webp" data-img-laugh="rebecca-laugh-cutout.webp">
+        <div class="face-circle"></div>
+        <img class="face-fallback" alt="Rebecca Ayele">
+        <canvas aria-label="Portrait of Rebecca Ayele. Drag to stretch it." role="img"></canvas>
+        <div class="face-hint">Grab my face, gently!</div>
+        <div class="face-say" aria-live="polite"></div>
+      </div>
+      <!-- ===== end face portrait markup ===== -->
       <dl class="facts-list">
         <div><dt>Based in</dt><dd>Abu Dhabi, UAE</dd></div>
         <div><dt>Languages</dt><dd>Amharic (native) · English (fluent)</dd></div>
@@ -551,5 +591,200 @@ document.getElementById('copy').addEventListener('click', function () {
 });
 </script>
 
+<script>
+/* Face portrait: elastic WebGL mesh + spring physics. No libraries. */
+(function () {
+  const root = document.getElementById('facePortrait');
+  if (!root) return;
+  const canvas = root.querySelector('canvas');
+  const gl = canvas.getContext('webgl', { premultipliedAlpha: true, alpha: true, antialias: true });
+  if (!gl) { const f = root.querySelector('.face-fallback'); if (f) f.src = root.dataset.img;
+    const a = document.getElementById('tnAvatar'); if (a) a.style.backgroundImage = 'url("' + root.dataset.img + '")';
+    root.classList.add('no-webgl'); canvas.style.display = 'none'; return; }
+
+  // Geometry in canvas units (0..1, y down). Must match the CSS .face-circle.
+  const CIRCLE = { x: 0.5, y: 0.58, r: 0.40 };
+  const IMG = { x: 0.05, y: 0.08, w: 0.90, h: 0.90 };
+  const PAD = 0.20;                 // canvas overhang on each side (matches the CSS -20%)
+  const N = 56;                     // mesh grid (N x N cells)
+  const SIGMA = 0.14;               // falloff radius: wide enough that a cheek pull drags that eye and the mouth
+  const MAX_PULL = 0.50;            // max stretch distance (soft-clamped), half the portrait
+  const K_DRAG = 1400, C_DRAG = 70; // stiff, near-critical: follows the finger
+  const K_REL = 340,  C_REL = 4.2;  // very underdamped: big overshoot and several wobbles
+
+  // ---- shaders
+  const vs = `const float PAD = ${PAD.toFixed(3)};
+    attribute vec2 aRest; attribute vec2 aOff; attribute vec2 aUV;
+    varying vec2 vUV; varying vec2 vPos; varying vec2 vRest;
+    void main(){ vec2 p = aRest + aOff; vPos = p; vRest = aRest; vUV = aUV;
+      vec2 q = (p + PAD) / (1.0 + 2.0*PAD);
+      gl_Position = vec4(q.x*2.0-1.0, 1.0-q.y*2.0, 0.0, 1.0); }`;
+  const fs = `precision mediump float;
+    varying vec2 vUV; varying vec2 vPos; varying vec2 vRest;
+    uniform sampler2D uT0; uniform sampler2D uT1; uniform sampler2D uT2; uniform sampler2D uT3; uniform sampler2D uT4;
+    uniform float uW[5];
+    uniform vec3 uCircle; uniform float uPx;
+    void main(){
+      vec4 c = texture2D(uT0, vUV)*uW[0] + texture2D(uT1, vUV)*uW[1] + texture2D(uT2, vUV)*uW[2]
+             + texture2D(uT3, vUV)*uW[3] + texture2D(uT4, vUV)*uW[4];   // expression crossfade
+      c *= smoothstep(0.0, 0.07, vUV.y);                       // feather the photo's top edge
+      float d = length(vPos - uCircle.xy);
+      float inside = 1.0 - smoothstep(uCircle.z - uPx, uCircle.z + uPx, d);   // fixed circle
+      float above = 1.0 - smoothstep(uCircle.y - 0.03, uCircle.y, vPos.y);   // head pops out on top
+      float face = 1.0 - smoothstep(uCircle.z*0.62, uCircle.z*0.72, length(vRest - uCircle.xy)); // stretched face may leave the circle
+      gl_FragColor = c * max(max(inside, above), face);
+    }`;
+  function sh(type, src) { const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s);
+    if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) throw gl.getShaderInfoLog(s); return s; }
+  const prog = gl.createProgram();
+  gl.attachShader(prog, sh(gl.VERTEX_SHADER, vs)); gl.attachShader(prog, sh(gl.FRAGMENT_SHADER, fs));
+  gl.linkProgram(prog); gl.useProgram(prog);
+
+  // ---- mesh
+  const V = (N + 1) * (N + 1);
+  const rest = new Float32Array(V * 2), uv = new Float32Array(V * 2);
+  const off = new Float32Array(V * 2), vel = new Float32Array(V * 2), weight = new Float32Array(V);
+  for (let j = 0, i = 0; j <= N; j++) for (let k = 0; k <= N; k++, i++) {
+    const u = k / N, v = j / N;
+    uv[i*2] = u; uv[i*2+1] = v;
+    rest[i*2] = IMG.x + u * IMG.w; rest[i*2+1] = IMG.y + v * IMG.h;
+  }
+  const idx = new Uint16Array(N * N * 6);
+  for (let j = 0, t = 0; j < N; j++) for (let k = 0; k < N; k++) {
+    const a = j*(N+1)+k, b = a+1, c = a+N+1, d = c+1;
+    idx.set([a, b, c, b, d, c], t); t += 6;
+  }
+  function buf(data, attr, dyn) {
+    const b = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, b);
+    gl.bufferData(gl.ARRAY_BUFFER, data, dyn ? gl.DYNAMIC_DRAW : gl.STATIC_DRAW);
+    const loc = gl.getAttribLocation(prog, attr); gl.enableVertexAttribArray(loc);
+    gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0); return b;
+  }
+  buf(rest, 'aRest'); buf(uv, 'aUV'); const offBuf = buf(off, 'aOff', true);
+  const ib = gl.createBuffer(); gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, ib);
+  gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, idx, gl.STATIC_DRAW);
+
+  gl.enable(gl.BLEND); gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
+  const uW = gl.getUniformLocation(prog, 'uW'), uPx = gl.getUniformLocation(prog, 'uPx');
+  gl.uniform3f(gl.getUniformLocation(prog, 'uCircle'), CIRCLE.x, CIRCLE.y, CIRCLE.r);
+  for (let t = 0; t < 5; t++) gl.uniform1i(gl.getUniformLocation(prog, 'uT' + t), t);
+
+  // ---- textures
+  function tex(unit, url) {
+    const t = gl.createTexture(); gl.activeTexture(gl.TEXTURE0 + unit); gl.bindTexture(gl.TEXTURE_2D, t);
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([0,0,0,0]));
+    const im = new Image(); im.crossOrigin = 'anonymous';
+    im.onload = () => { gl.activeTexture(gl.TEXTURE0 + unit); gl.bindTexture(gl.TEXTURE_2D, t);
+      gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, true);
+      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, im);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+      wake(); };
+    im.src = url;
+  }
+  // Expressions: 0 idle, 1 hover (silly), 2 ouch (dragging), 3 big OUCH (large pull), 4 relieved laugh (after release).
+  // A missing data-img-* falls back to the idle photo.
+  const IDLE = 0, SILLY = 1, OUCH = 2, BIGOUCH = 3, LAUGH = 4;
+  const ds = root.dataset;
+  [ds.img, ds.imgSilly, ds.imgOuch, ds.imgBigouch, ds.imgLaugh].forEach((u, t) => tex(t, u || ds.img));
+  const fb = root.querySelector('.face-fallback'); if (fb) fb.src = ds.img;
+  const av = document.getElementById('tnAvatar'); if (av) av.style.backgroundImage = 'url("' + ds.img + '")';
+  const BIG_ON = 0.62, BIG_OFF = 0.48;   // share of MAX_PULL where the big OUCH starts / stops
+  const LAUGH_MS = 1500;
+  const SAY = { [OUCH]: 'Ouch!', [BIGOUCH]: 'OUCH!! Gently!', [LAUGH]: 'Phew!' };
+  const sayEl = root.querySelector('.face-say');
+  const wts = new Float32Array([1, 0, 0, 0, 0]);
+  let expr = IDLE, big = false, laughUntil = 0;
+
+  // ---- sizing
+  let px = 1 / 500;
+  function resize() {
+    const dpr = Math.min(window.devicePixelRatio || 1, 2), w = canvas.clientWidth;
+    canvas.width = Math.round(w * dpr); canvas.height = Math.round(w * dpr);
+    gl.viewport(0, 0, canvas.width, canvas.height); px = 1.2 * (1 + 2*PAD) / (w * dpr); wake();
+  }
+  new ResizeObserver(resize).observe(canvas);
+
+  // ---- interaction: grab anywhere on the portrait
+  let drag = null, hover = false, touchTimer = 0;
+  function local(e) { const r = root.getBoundingClientRect();
+    return { x: (e.clientX - r.left) / r.width, y: (e.clientY - r.top) / r.height }; }
+  root.addEventListener('pointerdown', e => {
+    const p = local(e);
+    e.preventDefault(); root.setPointerCapture(e.pointerId);
+    drag = { id: e.pointerId, gx: p.x, gy: p.y, dx: 0, dy: 0 };
+    // weight each vertex by its current position, so a re-grab mid-wobble feels continuous
+    for (let i = 0; i < V; i++) { const x = rest[i*2]+off[i*2]-p.x, y = rest[i*2+1]+off[i*2+1]-p.y;
+      const vRow = (rest[i*2+1] - IMG.y) / IMG.h;               // 0 top .. 1 bottom of photo
+      const pin = 1 - Math.min(1, Math.max(0, (vRow - 0.80) / 0.20)); // bottom 20% held in place
+      weight[i] = Math.exp(-(x*x + y*y) / (2*SIGMA*SIGMA)) * pin * pin; }
+    root.classList.add('is-grabbing', 'was-grabbed');
+    if (e.pointerType !== 'mouse') { hover = true; clearTimeout(touchTimer); }
+    wake();
+  });
+  root.addEventListener('pointermove', e => {
+    if (e.pointerType === 'mouse' && !hover) { hover = true; wake(); }
+    if (!drag || e.pointerId !== drag.id) return;
+    const p = local(e);
+    let dx = p.x - drag.gx, dy = p.y - drag.gy; const L = Math.hypot(dx, dy);
+    if (L > 1e-6) { const s = MAX_PULL * Math.tanh(L / MAX_PULL) / L; dx *= s; dy *= s; }
+    drag.dx = dx; drag.dy = dy;
+    const pull = Math.hypot(dx, dy) / MAX_PULL;
+    if (!big && pull > BIG_ON) big = true; else if (big && pull < BIG_OFF) big = false;
+    wake();
+  });
+  function release(e) {
+    if (!drag || e.pointerId !== drag.id) return;
+    drag = null; big = false; root.classList.remove('is-grabbing');
+    laughUntil = performance.now() + LAUGH_MS;                 // relieved laugh, then back to idle/hover
+    setTimeout(wake, LAUGH_MS + 20);
+    if (e.pointerType !== 'mouse') { clearTimeout(touchTimer); touchTimer = setTimeout(() => { hover = false; wake(); }, LAUGH_MS); }
+    wake();
+  }
+  root.addEventListener('pointerup', release);
+  root.addEventListener('pointercancel', release);
+  root.addEventListener('pointerenter', e => { if (e.pointerType === 'mouse') { hover = true; wake(); } });
+  root.addEventListener('pointerleave', e => { if (e.pointerType === 'mouse' && !drag) { hover = false; wake(); } });
+
+  // ---- simulation + render loop (sleeps when still)
+  let running = false, last = 0;
+  function wake() { if (!running) { running = true; last = performance.now(); requestAnimationFrame(frame); } }
+  function frame(now) {
+    const dt = Math.min((now - last) / 1000, 1 / 30); last = now;
+    const k = drag ? K_DRAG : K_REL, c = drag ? C_DRAG : C_REL;
+    let energy = 0;
+    const steps = Math.max(1, Math.ceil(dt / (1 / 240))), h = dt / steps;
+    for (let s = 0; s < steps; s++) for (let i = 0; i < V; i++) {
+      const w = weight[i];
+      const tx = drag ? drag.dx * w : 0, ty = drag ? drag.dy * w : 0;
+      const ix = i*2, iy = ix+1;
+      vel[ix] += (k * (tx - off[ix]) - c * vel[ix]) * h; off[ix] += vel[ix] * h;
+      vel[iy] += (k * (ty - off[iy]) - c * vel[iy]) * h; off[iy] += vel[iy] * h;
+      if (s === steps - 1) energy += Math.abs(vel[ix]) + Math.abs(vel[iy]) + Math.abs(tx-off[ix]) + Math.abs(ty-off[iy]);
+    }
+    // pick the expression, then crossfade the texture weights towards it (~150 ms)
+    const want = drag ? (big ? BIGOUCH : OUCH) : (now < laughUntil ? LAUGH : (hover ? SILLY : IDLE));
+    if (want !== expr) { expr = want; root.dataset.expr = ['idle','silly','ouch','bigouch','laugh'][expr];
+      if (sayEl) { const t = SAY[expr]; if (t) sayEl.textContent = t;
+        sayEl.classList.toggle('show', !!t); sayEl.classList.toggle('big', expr === BIGOUCH); } }
+    let fading = false; const a = Math.min(1, dt * 16);
+    for (let t = 0; t < 5; t++) { const g = t === expr ? 1 : 0; wts[t] += (g - wts[t]) * a;
+      if (Math.abs(g - wts[t]) < 0.003) wts[t] = g; else fading = true; }
+
+    gl.bindBuffer(gl.ARRAY_BUFFER, offBuf); gl.bufferSubData(gl.ARRAY_BUFFER, 0, off);
+    gl.uniform1fv(uW, wts); gl.uniform1f(uPx, px);
+    gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT);
+    gl.drawElements(gl.TRIANGLES, idx.length, gl.UNSIGNED_SHORT, 0);
+
+    if (drag || energy > 2e-4 || fading || now < laughUntil) requestAnimationFrame(frame);
+    else { off.fill(0); vel.fill(0); running = false;
+      gl.bindBuffer(gl.ARRAY_BUFFER, offBuf); gl.bufferSubData(gl.ARRAY_BUFFER, 0, off);
+      gl.clear(gl.COLOR_BUFFER_BIT); gl.drawElements(gl.TRIANGLES, idx.length, gl.UNSIGNED_SHORT, 0); }
+  }
+  wake();
+})();
+</script>
 </body>
 </html>
